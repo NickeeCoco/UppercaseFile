@@ -16,8 +16,8 @@ public class UpperCaseFile {
 
     public void processFiles() {
         ArrayList<String> fileContents = readFile(filename1);
-        //processToUpper();
-        writeFile(filename2, fileContents);
+        ArrayList<String> processedArray = processToUpper(fileContents);
+        writeFile(filename2, processedArray);
     }
 
     public ArrayList<String> readFile(String filename) {
@@ -44,9 +44,28 @@ public class UpperCaseFile {
         }
     }
 
-    public ArrayList<String> processToUpper() {
-        ArrayList<String> array = new ArrayList<>();
-        return array;
+    public ArrayList<String> processToUpper(ArrayList<String> linesArray) {
+        ArrayList<String> processedArray = new ArrayList<String>();
+
+        for(String line: linesArray) {
+            String processedLine = "";
+            for(int letter = 0; letter < line.length(); letter++) {
+                char lowerCase = Character.toLowerCase(line.charAt(letter));
+
+                if(lowerCase == 'a'
+                        || lowerCase == 'e'
+                        || lowerCase == 'i'
+                        || lowerCase == 'o'
+                        || lowerCase == 'u') {
+                    processedLine += Character.toLowerCase(lowerCase);
+                } else {
+                    processedLine += Character.toUpperCase(line.charAt(letter));
+                }
+            }
+            processedArray.add(processedLine);
+        }
+
+        return processedArray;
     }
 
     public void writeFile(String filename, ArrayList<String> linesList) {
